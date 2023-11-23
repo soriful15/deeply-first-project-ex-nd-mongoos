@@ -1,5 +1,4 @@
-// mongoose er validation
-import { Schema, model } from 'mongoose';
+/* import { Schema, model } from 'mongoose';
 import {
   Guardian,
   LocalGuardian,
@@ -13,10 +12,14 @@ const userNameSchema = new Schema<UserName>({
     required: [true, 'First Name is Required'],
     trim: true,
     maxlength: [20, 'Name can not be more than 20 Characters'],
-    validate: {
-      validator: function (value: string) {
+     validate: {
+      validator: function (value: string) { // normal validator
         const FirstNameCase = value.charAt(0).toUpperCase() + value.slice(1);
-        return FirstNameCase === value;
+        // if(value !== FirstNameCase){
+        //   return false
+        // }
+        // return true
+        return FirstNameCase === value; // upor oi jinis ta short cut kore likha hoise
       },
       message: '{VALUE} is not in capitalize format',
     },
@@ -29,7 +32,7 @@ const userNameSchema = new Schema<UserName>({
     required: [true, 'Last Name is Required'],
     trim: true,
     maxlength: [20, 'Name can not be more than 20 Characters'],
-    validate: {
+    validate: { // package validator
       validator: (value: string) => validator.isAlpha(value),
       message: '{VALUE} is not valid',
     },
@@ -90,11 +93,6 @@ const studentSchema = new Schema<Student>({
     required: [true, 'ID is required'],
     unique: true,
   },
-  password: {
-    type: String,
-    required: [true, 'password is required'],
-    maxlength: [20, 'Password can not be more than 20 characters'],
-  },
   name: {
     type: userNameSchema,
     required: [true, 'Name is required'],
@@ -112,7 +110,7 @@ const studentSchema = new Schema<Student>({
     type: String,
     required: [true, 'email is required'],
     unique: true,
-    validate: {
+     validate: {
       validator: (value: string) => validator.isEmail(value),
       message: '{VALUE} is not a valid',
     },
@@ -148,16 +146,10 @@ const studentSchema = new Schema<Student>({
   profileImg: { type: String },
   isActive: {
     type: String,
-    enum: {
-      values: ['active', 'blocked'],
-      message: '{VALUE} is not a valid status',
-    },
+    enum: ['active', 'blocked'],
     default: 'active',
-  },
-  isDeleted: {
-    type: Boolean,
-    default: true,
   },
 });
 
 export const StudentModel = model<Student>('Student', studentSchema);
+ */
