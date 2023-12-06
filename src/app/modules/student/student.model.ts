@@ -324,6 +324,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
     id: {
       type: String,
       required: [true, 'ID is required'],
+      unique: true,
       // unique: true, // uniqe true comment korar karon onk time a password ak rokom hoite pare
     },
     user: {
@@ -344,7 +345,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       },
       required: [true, 'Gender is required'],
     },
-    dateOfBirth: { type: String },
+    dateOfBirth: { type: Date },
     email: {
       type: String,
       required: [true, 'email is required'],
@@ -383,6 +384,10 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'local Guardian is required'],
     },
     profileImg: { type: String },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
+    },
     isDeleted: {
       type: Boolean,
       default: false,
