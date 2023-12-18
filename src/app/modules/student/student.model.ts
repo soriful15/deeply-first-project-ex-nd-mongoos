@@ -242,7 +242,6 @@ import {
   TUserName,
 } from './student.interface';
 import validator from 'validator';
-
 const userNameSchema = new Schema<TUserName>({
   firstName: {
     type: String,
@@ -392,6 +391,10 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       type: Boolean,
       default: false,
     },
+    academicDepartment: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicDepartment',
+    },
   },
   {
     toJSON: {
@@ -401,7 +404,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
 );
 
 studentSchema.virtual('fullName').get(function () {
-  return `${this.name.firstName} ${this.name.middleName} ${this.name.lastName}`;
+  return `${this?.name?.firstName} ${this?.name?.middleName} ${this?.name?.lastName}`;
 });
 // Query Middleware
 studentSchema.pre('find', function (next) {
@@ -426,5 +429,4 @@ studentSchema.statics.isUserExists = async function (id: string) {
   const existingUser = await Student.findOne({ id });
   return existingUser;
 };
-
 export const Student = model<TStudent, StudentModel>('Student', studentSchema);

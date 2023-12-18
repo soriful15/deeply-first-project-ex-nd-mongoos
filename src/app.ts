@@ -11,9 +11,8 @@ app.use(cors());
 // app.use('/api/v1/students', StudentRoutes);
 app.use('/api/v1', router);
 
-const getAController = (req: Request, res: Response) => {
-  // const a = 10;
-  // console.log(a);
+const getAController = async (req: Request, res: Response) => {
+  // Promise.reject();
   res.send('first app running');
 };
 app.get('/', getAController);
